@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:latest          # pulls the newest official Postgres image
+    container_name: local_postgres  # easy-to-remember name when you run `docker ps`
+    environment:                    # sets DB login credentials
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lab3             # the DB your app will connect to
+    ports:
+      - "5432:5432"                 # hostPort:containerPort (leave 5432 unless it’s occupied)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # keeps data after container restarts
+    restart: unless-stopped         # auto‑start with Docker Desktop
+
+volumes:
+  postgres_data:                    # named volume declared here
